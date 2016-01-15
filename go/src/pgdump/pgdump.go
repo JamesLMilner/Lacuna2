@@ -144,8 +144,9 @@ func WKTtoJSON (geometries []string, wkttypes []string, start time.Time ) Return
 
     for i, g := range geometries {
         //log.Print(strconv.FormatInt(int64(len(geometries)), 10))
-        if i < len(wkttypes) - 1 {
+        if i <= len(wkttypes) - 1 {
             g = removeTrails(g)
+            log.Print()
             subgeoms := strings.Split(g, "),(")
             for _, subgeom := range subgeoms {
                 subgeom = removeTrails(subgeom)
