@@ -110,8 +110,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
             e          := strings.LastIndex(returngeom, ")") - 1
             geomsstr   := returngeom[s:e] // From ( to )
             geomsre    := regexp.MustCompile(`GEOMETRY|POINT|MULTIPOINT|LINESTRING|MULTILINESTRING|COMPOUNDCURVE|
-                                              MULTIPOLYGON|TRIANGLE|CIRCULARSTRING|CURVE|MULTICURVE|POLYGON|
-                                              CURVEPOLYGON|SURFACE|MULTISURFACE|POLYHEDRALSURFACE Z|TIN Z`)
+                                              MULTIPOLYGON|TRIANGLE|CIRCULARSTRING|CURVE|MULTICURVE|POLYGON|POLYGON Z|
+                                              CURVEPOLYGON|SURFACE|MULTISURFACE|POLYHEDRALSURFACE Z|TIN|TIN Z`)
             geometries := geomsre.Split(geomsstr, -1)
             wkttypes    := geomsre.FindAllString(geomsstr, -1)
 
@@ -205,6 +205,6 @@ func handleError(w http.ResponseWriter, err string) {
 }
 
 func main() {
-    http.HandleFunc("/", handler)
+    http.HandleFunc("/lacuna", handler)
     http.ListenAndServe(":8080", nil)
 }
